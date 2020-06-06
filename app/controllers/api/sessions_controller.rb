@@ -6,7 +6,6 @@ class Api::SessionsController < ApplicationController
                 .find_by(email: params["user"]["email"])
                 .try(:authenticate, params["user"]["password"])
         
-        binding.pry
         if @user 
             session[:user_id] = @user.id 
             render '/api/sessions/show'

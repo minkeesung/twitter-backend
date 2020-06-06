@@ -4,6 +4,8 @@ class User < ApplicationRecord
     validates_presence_of :email 
     validates_uniqueness_of :email
 
+    has_many :tweets, dependent: :destroy
+
     has_many :active_relationships, class_name: 'Relationship', foreign_key: :follower_id
     has_many :followees, class_name: 'User', through: :active_relationships
   
@@ -14,9 +16,11 @@ class User < ApplicationRecord
         followees << user if !self.following?(user) && self != user
     end
 
-
     def following?(user)
         followees.include?(user)
     end
 
+    def unfollow(user)
+        followees.delete(user)
+    end
 end

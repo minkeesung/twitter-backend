@@ -12,5 +12,10 @@ class Api::RelationshipsController < ApplicationController
       render json: {id: params[:id]}
     end
 
+    def show
+        user = User.find_by(id: params[:id])
+        following = current_user.following?(user)
+        render json: {following: following}
+    end 
   end
   

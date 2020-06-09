@@ -23,4 +23,12 @@ class User < ApplicationRecord
     def unfollow(user)
         followees.delete(user)
     end
+
+    def feed
+        following_ids = "SELECT followee_id from relationships
+                         WHERE follower_id = :user_id"
+                         
+        Tweet.where("user_id in (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+    end 
 end

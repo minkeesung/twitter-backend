@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
 
     def logged_in
         if @current_user 
-            render '/api/users/show'
+            render '/api/sessions/logged'
         else 
             render json: { logged_in: false }
         end

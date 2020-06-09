@@ -1,0 +1,1 @@
+json.extract! @tweet, :body, :created_at, :id, :user_id
